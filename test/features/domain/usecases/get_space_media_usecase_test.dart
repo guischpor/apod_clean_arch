@@ -21,13 +21,8 @@ void main() {
     registerFallbackValue(DateTime(2000));
   });
 
-  // final tNoParams = NoParams();
-
   test('should get space media entity for a given date from the repository ',
       () async {
-    // when(repository)
-    //     .calls(#getSpaceMediaFromDate)
-    //     .thenAnswer((_) async => Right(tSpaceMedia));
     when(() => repository.getSpaceMediaFromDate(any())).thenAnswer(
         (_) async => const Right<Failure, SpaceMediaEntity>(tSpaceMedia));
 
