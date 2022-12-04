@@ -1,5 +1,4 @@
 import 'package:apod/core/errors/failures.dart';
-import 'package:apod/core/usecase/usecase.dart';
 import 'package:apod/features/domain/entities/space_media_entity.dart';
 import 'package:apod/features/domain/repositories/space_media_repository.dart';
 import 'package:apod/features/domain/usecases/get_space_media_from_date_usecase.dart';
@@ -22,7 +21,7 @@ void main() {
     registerFallbackValue(DateTime(2000));
   });
 
-  final tNoParams = NoParams();
+  // final tNoParams = NoParams();
 
   test('should get space media entity for a given date from the repository ',
       () async {
