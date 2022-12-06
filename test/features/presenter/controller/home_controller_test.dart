@@ -1,3 +1,4 @@
+import 'package:apod/core/errors/failures.dart';
 import 'package:apod/features/domain/usecases/get_space_media_from_date_usecase.dart';
 import 'package:apod/features/presenter/controller/home_controller.dart';
 import 'package:dartz/dartz.dart';
@@ -25,9 +26,21 @@ void main() {
         .thenAnswer((_) async => const Right(tSpaceMedia));
     final result = await controller.getSpaceMediaFromDate(tDate);
 
-    print(result);
+    print("result: $result");
 
-    expect(result, tSpaceMedia);
+    expect(result, const Right(tSpaceMedia));
+    verify(() => mockUsecase(tDate)).called(1);
+  });
+
+  final tFailure = ServerFailure();
+
+  test('should return a Failure from the usecase when there is an error',
+      () async {
+    when(() => mockUsecase(any())).thenAnswer((_) async => Left(tFailure));
+
+    final result = await controller.getSpaceMediaFromDate(tDate);
+
+    expect(result, Left(tFailure));
     verify(() => mockUsecase(tDate)).called(1);
   });
 }
